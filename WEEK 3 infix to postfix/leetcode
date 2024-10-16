@@ -1,0 +1,36 @@
+int findex(int* number, int value, int length) {
+    for (int i = 0; i < length; i++) {
+        if (number[i] == value) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int majorityElement(int* nums, int numsSize) {
+    int ans = numsSize / 2;
+    int c = 0;
+    int number[numsSize]; 
+    int numcount[numsSize];
+
+    for (int i = 0; i < numsSize; i++) {
+        int length = c; 
+        if (findex(number, nums[i], length) == -1) {
+            number[c] = nums[i];
+            numcount[c] = 1;
+            c++;
+        } else {
+            int index = findex(number, nums[i], length);
+            numcount[index]++;
+        }
+    }
+
+    
+    for (int i = 0; i < c; i++) {
+        if (numcount[i] > ans) {
+            return number[i];
+        }
+    }
+
+    return -1; 
+}
